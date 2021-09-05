@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CompanyController;
+use App\Exports\CompanyExport;
+use App\Exports\ProductExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +48,14 @@ Route::post('companies', [CompanyController::class, 'store'])->name('companies.s
 Route::put('companies/{id}', [CompanyController::class, 'update'])->name('companies.update');
 //eliminar producto id
 Route::delete('companies/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+
+//rutas para exportar e importar productos
+Route::get('export/excel/products', function (){
+    return Excel::download(new ProductExport(), 'list-products.xlsx');
+})->name('products.export');
+
+
+//rutas para exportar e importar compañias
+Route::get('export/excel/companies', function (){
+    return Excel::download(new CompanyExport(), 'list-companies.xlsx');
+});

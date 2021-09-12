@@ -29,6 +29,30 @@
                 </div>
             </form>
         </div>
+        <div class="col-6">
+            <form action="{{route('companies.import.excel')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label for="importFile" class="form-label">Archivo de excel</label>
+                    <input class="form-control" type="file" id="importFile" name="importFile">
+                </div>
+                <table class="table caption-top">
+                    <caption>Ejemplo de formato</caption>
+                    <thead>
+                    <tr>
+                        <td><b>Nombre</b></td>
+                        <td><b>NIT</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>nombre</td>
+                        <td>123-456</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
     </div>
 </div>
 </body>

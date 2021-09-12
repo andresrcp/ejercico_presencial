@@ -55,6 +55,7 @@
                 </table>
             </div>
         </div>
+        <a href="{{route('products.export.excel')}}" class="btn btn-secondary btn-sm">Descargar</a>
         <div class="position-relative col-md-12">
             <nav aria-label="pagination">
                 {{$products->links()}}

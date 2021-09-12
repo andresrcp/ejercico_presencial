@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ProductImport;
 use App\Models\Product;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Excel;
 
 class ProductController extends Controller
 {
@@ -75,6 +78,19 @@ class ProductController extends Controller
         //buscamos el producto por id
         //select * from products where id
         $product = Product::find($id)->delete();
+        //regresamos al listado de productos
+        return redirect('products');
+    }
+
+    //descarga de listado en archivo .xlsx
+    public function export(){
+        return (new ProductExport)->download('products.xlsx');
+    }
+
+    //cargar datos por medio de archivo .xlsx
+    public function importExcel(Request $request){
+        $file = $request->file('importFile');
+        Excel::import(new ProductImport(), $file);
         //regresamos al listado de productos
         return redirect('products');
     }

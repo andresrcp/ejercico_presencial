@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CompanyExport;
+use App\Imports\CompanyImport;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Maatwebsite\Excel\Excel;
 
 class CompanyController extends Controller
 {
@@ -65,6 +68,17 @@ class CompanyController extends Controller
         //buscamos el producto por id
         $company = Company::find($id)->delete();
         //regresamos al index de companies
+        return redirect('companies');
+    }
+
+    public function export(){
+        return (new CompanyExport)->download('companies.xlsx');
+    }
+
+    public function import(Request $request){
+        $file = $request->file('importFile');
+        Excel::import(new CompanyImport, $file);
+        //regresamos al listado de companies
         return redirect('companies');
     }
 }

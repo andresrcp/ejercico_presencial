@@ -20,7 +20,6 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->double('price');
             $table->text('image');
-            //$table->integer('companies_id')->unsigned();
             $table->foreignId('companies_id')->references('id')->on('companies');
 
             $table->timestamps();

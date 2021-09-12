@@ -3,10 +3,11 @@
 namespace App\Exports;
 
 use App\Models\Company;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class CompanyExport implements FromCollection
+class CompanyExport implements FromView
 {
     use Exportable;
     /**
@@ -15,5 +16,12 @@ class CompanyExport implements FromCollection
     public function collection()
     {
         return Company::all();
+    }
+
+    public function view(): View
+    {
+        return view('companies.export',[
+            'companies'=>Company::get()
+        ]);
     }
 }

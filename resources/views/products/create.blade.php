@@ -23,7 +23,7 @@
                 <label for="price" class="form-label"><b>Precio</b></label>
                 <input type="number" name="price" id="price" class="form-control" step="0.01">
                 <label for="image" class="form-label"><b>URL Imagen</b></label>
-                <input type="text" name="image" id="image" class="form-control" placeholder="www.google.com."
+                <input type="text" name="image" id="image" class="form-control" placeholder="www.google.com"
                        aria-describedby="imagelHelp">
                 <div id="imagelHelp" class="form-text">Pega el enlace o dirección (URL) de tu imagen.</div><br>
                 <div class="input-group mb-3">
@@ -42,6 +42,37 @@
                         <a href="{{route('products.index')}}" class="btn btn-link btn-md col-5">Cancelar</a>
                     </div>
                 </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <form action="{{route('products.import.excel')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label for="importFile" class="form-label">Archivo de excel</label>
+                    <input class="form-control" type="file" id="importFile" name="importFile">
+                </div>
+                <table class="table caption-top">
+                    <caption>Ejemplo de formato</caption>
+                    <thead>
+                    <tr>
+                        <td><b>Producto</b></td>
+                        <td><b>Descripcion</b></td>
+                        <td><b>Precio</b></td>
+                        <td><b>Imagen</b></td>
+                        <td><b>Empresa</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>nombre</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, itaque.</td>
+                        <td>12345.67</td>
+                        <td>www.ejemplo.com</td>
+                        <td>25</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-warning btn-md">Cargar</button>
             </form>
         </div>
     </div>

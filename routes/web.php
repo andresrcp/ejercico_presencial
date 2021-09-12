@@ -17,6 +17,8 @@ use App\Exports\ProductExport;
 |
 */
 
+//creacion de todas las rutas necesarias para Product
+
 //listado de productos
 Route::get('products', [ProductController::class, 'index'])->name('products.index');
 //formulario nuevo producto
@@ -49,13 +51,11 @@ Route::put('companies/{id}', [CompanyController::class, 'update'])->name('compan
 //eliminar producto id
 Route::delete('companies/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
 
-//rutas para exportar e importar productos
-Route::get('export/excel/products', function (){
-    return Excel::download(new ProductExport(), 'list-products.xlsx');
-})->name('products.export');
+//rutas para exportar e importar products
+Route::get('products/excel/export', [ProductController::class, 'export'])->name('products.export.excel');
+Route::post('products/excel/import', [ProductController::class, 'importExcel'])->name('products.import.excel');
 
 
-//rutas para exportar e importar compañias
-Route::get('export/excel/companies', function (){
-    return Excel::download(new CompanyExport(), 'list-companies.xlsx');
-});
+//rutas para exportar e importar companies
+Route::get('companies/excel/export',[CompanyController::class,'export'])->name('companies.export.excel');
+Route::post('products/excel/import', [CompanyController::class, 'import'])->name('companies.import.excel');
